@@ -68,6 +68,8 @@ ${SCRIPTS}/composer.sh
 
 #${SCRIPTS}/supervisor.sh
 
+${SCRIPTS}/zsh.sh
+
 if [ -n "$DATABASE_NAME" ];
 then
     ${SCRIPTS}/${DATABASE_TYPE}_createdb.sh $DATABASE_NAME $DATABASE_ROOT_PASSWORD
