@@ -6,14 +6,14 @@ ENV_NAME=$2
 echo "--- Add Laravel dev packcages ---"
 
 ################################
-echp "update composer.json"
+echo "update composer.json"
 ################################
 
 cd ${PROJECT_PATH}
 
 composer require --no-update rtablada/package-installer:dev-master
 composer require --no-update barryvdh/laravel-debugbar:1.* pda/pheanstalk:dev-master anahkiasen/rocketeer:dev-master anahkiasen/former:dev-master
-composer require --dev --no-update way/generators:dev-master way/laravel-test-helpers:dev-master barryvdh/laravel-ide-helper:1.*
+composer require --dev --no-update way/guard-laravel:dev-master way/generators:dev-master way/laravel-test-helpers:dev-master barryvdh/laravel-ide-helper:1.*
 composer require --dev --no-update fzaninotto/faker:dev-master codeception/codeception:* phpunit/phpunit=3.7.*
 
 # adding recommended action for laravel-debugbar
@@ -58,6 +58,7 @@ echo "register providers via start file (see https://github.com/laravel/framewor
 ################################
 
 echo "App::register('Way\\Generators\\GeneratorsServiceProvider');" >> ${ENV_NAME}.php
+echo "App::register('Way\\Console\\GuardLaravelServiceProvider');" >> ${ENV_NAME}.php
 echo "App::register('Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider');" >> ${ENV_NAME}.php
 
 echo -e '\n' >> ${ENV_NAME}.php
@@ -110,6 +111,7 @@ php artisan debugbar:publish
 php artisan config:publish barryvdh/laravel-ide-helper --env="${ENV_NAME}"
 php artisan config:publish barryvdh/laravel-debugbar
 php artisan config:publish anahkiasen/former
+php artisan config:publish way/guard-laravel
 
 # ignite is interactive and needs manual setup
 # php artisan deploy:ignite

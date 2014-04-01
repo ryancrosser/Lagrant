@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPTS=/vagrant/vagrant/scripts
-PROJECT_PATH=/vagrant
+PROJECT_PATH=/site
 
 ENV_NAME=$1
 DATABASE_TYPE=$2
@@ -15,7 +15,8 @@ ${SCRIPTS}/init.sh $ENV_NAME
 ${SCRIPTS}/php.sh
 
 # web server MUST be installed immediately after PHP
-${SCRIPTS}/nginx.sh
+#${SCRIPTS}/nginx.sh
+${SCRIPTS}/apache2.sh
 
 ${SCRIPTS}/documentroot.sh
 
@@ -25,7 +26,7 @@ ${SCRIPTS}/ruby.sh
 
 ${SCRIPTS}/${DATABASE_TYPE}.sh $DATABASE_ROOT_PASSWORD
 
-${SCRIPTS}/sqlite.sh
+#${SCRIPTS}/sqlite.sh
 
 ${SCRIPTS}/redis.sh
 
@@ -49,9 +50,9 @@ ${SCRIPTS}/sass.sh
 
 ${SCRIPTS}/coffeescript.sh
 
-${SCRIPTS}/dart.sh
+#${SCRIPTS}/dart.sh
 
-${SCRIPTS}/imagick.sh
+#${SCRIPTS}/imagick.sh
 
 # FFMpeg needs to be compiled, it takes a lot of time
 # So uncomment ffmpeg installer if you really need it
@@ -59,13 +60,13 @@ ${SCRIPTS}/imagick.sh
 
 ${SCRIPTS}/xdebug.sh
 
-${SCRIPTS}/phpunit.sh
+#${SCRIPTS}/phpunit.sh
 
 ${SCRIPTS}/composer.sh
 
-${SCRIPTS}/beanstalkd.sh
+#${SCRIPTS}/beanstalkd.sh
 
-${SCRIPTS}/supervisor.sh
+#${SCRIPTS}/supervisor.sh
 
 if [ -n "$DATABASE_NAME" ];
 then
